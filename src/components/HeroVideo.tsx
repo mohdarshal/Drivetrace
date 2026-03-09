@@ -5,12 +5,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroVideo = () => {
-const containerRef = useRef(null);
-const overlayRef = useRef(null);
+const containerRef = useRef<HTMLDivElement>(null);
+const overlayRef = useRef<HTMLDivElement>(null);
 
 useEffect(() => {
 const container = containerRef.current;
 if (!container) return;
+
 
 if (overlayRef.current) {
   gsap.to(overlayRef.current, {
@@ -30,13 +31,20 @@ return () => {
   ScrollTrigger.getAll().forEach((t) => t.kill());
 };
 
+
 }, []);
 
-return (
+return ( <div ref={containerRef} className="relative h-screen w-full" id="home"> <div className="absolute inset-0 w-full h-full overflow-hidden">
 
 
-
-
+    <video
+      className="w-full h-full object-cover"
+      src="/videos/car.mp4"
+      autoPlay
+      loop
+      muted
+      playsInline
+    ></video>
 
     <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background pointer-events-none"></div>
 
@@ -56,8 +64,10 @@ return (
         <div className="w-1 h-2 rounded-full bg-primary animate-pulse-glow"></div>
       </div>
     </div>
+
   </div>
 </div>
+
 
 );
 };
